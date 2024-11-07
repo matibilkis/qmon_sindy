@@ -1,0 +1,12 @@
+executable=HPC/sinin_1_15/subash_traj_NN.sh
+name=sinin1_15
+noise=0.011
+output = ../jobs/outs/$(name)_$(Item)_$(noise).out
+error = ../jobs/errs/$(name)_$(Item)_$(noise).err
+log = ../jobs/logs/$(name)_$(Item)_$(noise).log
+request_cpus = 1
+request_memory = 2 GB
++flavour="short"
+requirements= Has_avx == true
+args=$(Item) $(noise)
+queue from seq 1 1 4|

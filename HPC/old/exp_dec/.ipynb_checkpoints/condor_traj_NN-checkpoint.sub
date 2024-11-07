@@ -1,0 +1,11 @@
+executable=HPC/exp_dec/subash_traj_NN.sh
+
+output = ../jobs/outs/exp_dec$(Item).out
+error = ../jobs/errs/exp_dec$(Item).err
+log = ../jobs/logs/exp_dec$(Item).log
+request_cpus = 8
+request_memory = 8 GB
++flavour="short"
+
+args=$(Item)
+queue from seq 1 8 992|

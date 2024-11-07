@@ -1,0 +1,12 @@
+executable=HPC/sin/subash_traj_NN.sh
+
+noise=0.011
+output = ../jobs/outs/sin$(Item)_$(noise).out
+error = ../jobs/errs/sin$(Item)_$(noise).err
+log = ../jobs/logs/sin$(Item)_$(noise).log
+request_cpus = 1
+request_memory = 2 GB
++flavour="short"
+requirements= Has_avx == true
+args=$(Item) $(noise)
+queue from seq 1 1 4|

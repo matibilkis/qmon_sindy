@@ -1,0 +1,11 @@
+executable=HPC/SINDy_osc_exp_dec/subash_traj_NN.sh
+
+output = ../jobs/outs/Sindyosc_exp_dec$(Item).out
+error = ../jobs/errs/Sindyosc_exp_dec$(Item).err
+log = ../jobs/logs/Sindyosc_exp_dec$(Item).log
+request_cpus = 1
+request_memory = 2 GB
++flavour="medium"
+
+args=$(Item)
+queue from seq 1 1 20|
