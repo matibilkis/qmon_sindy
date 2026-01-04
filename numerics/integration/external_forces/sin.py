@@ -46,16 +46,44 @@ def IntLoop(times):
         dys.append(C.dot(hidden_state[ind])*dt + proj_C.dot(dW[ind]))
     return hidden_state, external_signal, dys
 
-def integrate(params, periods=10,ppp=500,  itraj=1, exp_path="",**kwargs):
-    global dt, proj_C, A, XiCov, C, dW, params_force, signal_coeff_hidden,fhidden, omega_f, amplitude_f, Af
+def integrate(params, periods=10, ppp=500, itraj=1, exp_path="", **kwargs):
+    """
+    Integrate quantum harmonic oscillator with sinusoidal external force.
+    
+    Simulates a continuously-monitored quantum harmonic oscillator subject to a
+    sinusoidal external force. The system evolves according to the stochastic
+    master equation, generating quantum trajectories and measurement records.
+    
+    The external force follows:
+        df/dt = [[0, ω_f], [-ω_f, 0]] · f
+        f_0 = [f_0^(a), f_0^(b)]
+    
+    Args:
+        params: [params_sensor, params_force] where
+            params_sensor = [gamma, omega, n, eta, kappa]
+            params_force = [[f_0^(a), f_0^(b)], [omega_f], 'sin']
+        periods: Number of oscillator periods to simulate
+        ppp: Points per period (determines time step dt = period/ppp)
+        itraj: Trajectory index (used as random seed)
+        exp_path: Subdirectory path for saving results
+        **kwargs: Additional arguments (unused)
+        
+    Returns:
+        None (saves results to disk):
+            - hidden_state.npy: True quantum state trajectory [N, 2]
+            - external_signal.npy: True external force [N, 2]
+            - dys.npy: Measurement record [N, 2]
+    """
+    global dt, proj_C, A, XiCov, C, dW, params_force, signal_coeff_hidden, fhidden, omega_f, amplitude_f, Af
     [gamma, omega, n, eta, kappa], params_force = params
     omega_f = params_force[1][0]
-    fhidden = params_force[0] #i look at the first component of fhidden, but dx = A-() *dt + fdt, with (0, f) and x=(x,p), so it's a force
-    Af = np.array([[0.,omega_f],[-omega_f,0.]])
+    # First component of fhidden enters as force in second component of x (momentum)
+    fhidden = params_force[0]
+    Af = np.array([[0., omega_f], [-omega_f, 0.]])
     period = (2*np.pi/omega)
     total_time = period*periods
     dt = period/ppp
-    times = np.arange(0.,total_time+dt,dt)
+    times = np.arange(0., total_time+dt, dt)
 
     #### generate long trajectory of noises
     np.random.seed(itraj)
