@@ -1,15 +1,16 @@
 # Language detection for GitHub
+# Mark Python files as code
 *.py linguist-detectable=true
-*.ipynb linguist-detectable=true
 
 # Exclude analysis notebooks from language stats (they're for exploration, not core code)
-analysis/**/*.ipynb linguist-documentation=false
+# Marking as documentation so they don't count toward code statistics
+analysis/**/*.ipynb linguist-documentation=true
 
-# Mark test files
-tests/**/*.py linguist-documentation=false
-
-# Mark old/legacy code
+# Mark old/legacy code as vendored (excluded from language stats)
 **/old/** linguist-vendored=true
 **/viejo/** linguist-vendored=true
 **/viejitos/** linguist-vendored=true
+
+# Keep test files in language stats (they're part of the codebase)
+tests/**/*.py linguist-detectable=true
 
