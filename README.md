@@ -124,6 +124,7 @@ class GRNN(torch.nn.Module):
 ✅ **Statistical Inference**: Bayesian-style parameter estimation from noisy quantum data  
 ✅ **Automated Experimentation**: Hyperparameter sweeps, automated result saving/loading  
 ✅ **Complex Modeling**: Quantum filtering, stochastic master equations, SDE integration  
+✅ **Comprehensive Testing**: Full test suite with pytest covering all major components  
 
 ### Example Results
 
@@ -185,6 +186,33 @@ cd HPC/sinin_1_15
 condor_submit condor_traj_NN.sub
 ```
 
+### Running Tests
+
+The repository includes a comprehensive test suite using pytest:
+
+```bash
+# Install test dependencies (if not already installed)
+pip install -r requirements.txt
+
+# Run all tests
+pytest tests/ -v
+
+# Run specific test file
+pytest tests/test_models.py -v
+
+# Run with coverage report
+pytest tests/ --cov=numerics --cov-report=html
+```
+
+**Test Coverage:**
+- ✅ Utility functions (parameter generation, data loading)
+- ✅ Loss functions (maximum likelihood, regularization)
+- ✅ Neural network models (GRNN, RecurrentNetwork)
+- ✅ Quantum trajectory integration
+- ✅ SDE solvers (RK4, Euler-Maruyama, Rossler)
+
+All tests are designed to be fast and can run without requiring pre-generated data files (using temporary directories for integration tests).
+
 ---
 
 ## 📁 Repository Structure
@@ -200,6 +228,12 @@ qmon_sindy/
 │   │   ├── modes/            # Training scripts for different force types
 │   │   └── losses.py         # Maximum likelihood loss functions
 │   └── utilities/            # Data loading, plotting, parameter management
+├── tests/                     # Comprehensive test suite
+│   ├── test_utilities.py     # Tests for utility functions
+│   ├── test_losses.py        # Tests for loss functions
+│   ├── test_models.py        # Tests for neural network models
+│   ├── test_integration.py   # Tests for quantum trajectory integration
+│   └── test_sde_solvers.py   # Tests for SDE solvers
 ├── analysis/                 # Jupyter notebooks for analysis
 ├── HPC/                      # HTCondor job submission scripts
 ├── mp_runs/                  # Multiprocessing scripts for parallel execution
