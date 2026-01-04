@@ -29,8 +29,11 @@ env/
 .venv
 
 # Jupyter Notebook
-.ipynb_checkpoints
-*.ipynb_checkpoints
+.ipynb_checkpoints/
+*.ipynb_checkpoints/
+**/.ipynb_checkpoints/
+**/__pycache__/
+__pycache__/
 
 # IDE
 .vscode/
@@ -65,4 +68,7 @@ jobs/
 # HPC
 condor_*.sub
 *.sh.log
+
+# Analysis notebooks (optional - uncomment if you want to exclude them)
+# analysis/**/*.ipynb
 

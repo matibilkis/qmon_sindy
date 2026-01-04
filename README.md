@@ -3,6 +3,9 @@
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-Latest-orange.svg)](https://pytorch.org/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Tests](https://img.shields.io/badge/Tests-pytest-blue.svg)](tests/)
+
+> **A quantum extension of the Sparse Identification of Nonlinear Dynamics (SINDy) algorithm** for discovering quantum master equations from continuous measurement records and time-series quantum sensing data.
 
 > **A quantum extension of the Sparse Identification of Nonlinear Dynamics (SINDy) algorithm** for discovering quantum master equations from continuous measurement records and time-series quantum sensing data.
 
@@ -219,7 +222,7 @@ All tests are designed to be fast and can run without requiring pre-generated da
 
 ```
 qmon_sindy/
-├── numerics/
+├── numerics/                  # Core Python implementation (main codebase)
 │   ├── integration/          # Quantum trajectory simulation
 │   │   ├── external_forces/  # Different force types (sin, exp-dec, FHN, etc.)
 │   │   └── steps.py          # Numba-accelerated SDE solvers
@@ -228,17 +231,22 @@ qmon_sindy/
 │   │   ├── modes/            # Training scripts for different force types
 │   │   └── losses.py         # Maximum likelihood loss functions
 │   └── utilities/            # Data loading, plotting, parameter management
-├── tests/                     # Comprehensive test suite
+├── tests/                     # Comprehensive test suite (pytest)
 │   ├── test_utilities.py     # Tests for utility functions
 │   ├── test_losses.py        # Tests for loss functions
 │   ├── test_models.py        # Tests for neural network models
 │   ├── test_integration.py   # Tests for quantum trajectory integration
 │   └── test_sde_solvers.py   # Tests for SDE solvers
-├── analysis/                 # Jupyter notebooks for analysis
+├── analysis/                 # Jupyter notebooks for exploration/analysis
 ├── HPC/                      # HTCondor job submission scripts
 ├── mp_runs/                  # Multiprocessing scripts for parallel execution
-└── readme_plots/             # Example visualizations
+├── setup.py                  # Package installation script
+├── requirements.txt          # Python dependencies
+├── .gitattributes            # Git language detection configuration
+└── README.md                 # This file
 ```
+
+**Note**: The repository is primarily Python code. Jupyter notebooks in `analysis/` are for exploration and visualization, not part of the core codebase.
 
 ---
 
